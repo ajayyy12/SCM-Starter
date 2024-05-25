@@ -59,17 +59,19 @@ export default function HomePage() {
     }
   }
 
-  const deposit = async() => {
+  const dollars = async() => {
     if (atm) {
-      let tx = await atm.deposit(1);
+      let inr=prompt("Enter the amount in INR");
+      let tx = await atm.usd(inr);
       await tx.wait()
       getBalance();
     }
   }
 
-  const withdraw = async() => {
+  const pounds = async() => {
     if (atm) {
-      let tx = await atm.withdraw(1);
+      let inr=prompt("Enter the amount in INR");
+      let tx = await atm.pounds(inr);
       await tx.wait()
       getBalance();
     }
@@ -93,9 +95,9 @@ export default function HomePage() {
     return (
       <div>
         <p>Your Account: {account}</p>
-        <p>Your Balance: {balance}</p>
-        <button onClick={deposit}>Deposit 1 ETH</button>
-        <button onClick={withdraw}>Withdraw 1 ETH</button>
+        <p>Conversion Result: {balance}</p>
+        <button onClick={dollars}>Convert to USD</button>
+        <button onClick={pounds}>Convert to GBP</button>
       </div>
     )
   }
@@ -104,7 +106,7 @@ export default function HomePage() {
 
   return (
     <main className="container">
-      <header><h1>Welcome to the Metacrafters ATM!</h1></header>
+      <header><h1>Money Convertor!</h1><section>You can convert your iNR amount either to usd or pounds. The conversion rate is 1USD=83INR, 1GBP=104INR </section></header>
       {initUser()}
       <style jsx>{`
         .container {
